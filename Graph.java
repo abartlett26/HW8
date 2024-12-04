@@ -1,6 +1,6 @@
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   ANNIKA BARTLETT / 002
  *
  *   Note, additional comments provided throughout this source code
  *   is for educational purposes
@@ -103,8 +103,37 @@ public class Graph {
    */
   
   public int findRoot() {
+    // array the length of the num of vertices
+    int[] incomingEdges = new int[numVertices];
 
-    // ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOUR NAME/SECTION AT TOP OF FILE
-    return -1;
+    // traverse adjacency list
+    // for each vertex
+    for (int src = 0; src < numVertices; src++) {
+      // look at all possible destinations
+      for (int i = 0; i < adjListArr[src].size(); i++) {
+        // get destination vertex
+        int dest = adjListArr[src].get(i);
+        // for that destination vertex (index in the array), mark that there is an incoming edge
+        incomingEdges[dest]++;
+      }
+    }
+
+    int roots = 0;
+    int rootIndex = -1;
+
+    // iterate through array
+    for (int j = 0; j < numVertices; j++) {
+      // if no incoming, increase roots and keep track of index
+      if (incomingEdges[j] == 0) {
+        roots++;
+        rootIndex = j;
+      }
+    }
+
+    if (roots != 1) {
+      return -1;
+    }
+
+    return vertexValues.get(rootIndex);
   } 
 }
